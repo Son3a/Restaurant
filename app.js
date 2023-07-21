@@ -20,6 +20,9 @@ app.use(cors());
 
 
 route(app)
+app.get('/',(req,res)=>{
+    res.send("HELLOO")
+})
 
 app.use(notFoundMiddleware);
 
