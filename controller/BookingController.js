@@ -159,7 +159,7 @@ const getBookingHistoryByClient = async (req, res) => {
     }
 }
 
-const getBookingHistory = async (req, res) => {
+const    = async (req, res) => {
     try {
         const { idClient, idBooking } = req.body
 
