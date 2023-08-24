@@ -1,7 +1,7 @@
 const config = {
-    user: "sa",
-    password: "123",
-    server: "127.0.0.1",
+    user: "sonba7b1_SQLLogin_3",
+    password: "vfqh1g5kt7",
+    server: "NHA_HANG.mssql.somee.com",
     database: "NHA_HANG",
     pool: {
         max: 10,

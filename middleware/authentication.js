@@ -1,4 +1,3 @@
-const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const { UnauthenticatedError } = require('../errors');
 require('dotenv').config();
@@ -9,13 +8,15 @@ const authMiddleWare = (req, res, next) => {
     if (!authHeader || !authHeader.startsWith('Bearer '))
         throw new UnauthenticatedError('Invalid credential!');
 
+
     const token = authHeader.split(' ')[1];
 
     try {
         const payload = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = { userId: payload.userId, name: payload.name };
+        req.user = { userId: payload.userId, role: payload.role };
         next();
     } catch (error) {
+        console.log(error);
         throw new UnauthenticatedError('Invalid credential!');
     }
 }
