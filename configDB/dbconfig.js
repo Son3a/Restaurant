@@ -16,12 +16,12 @@
 // }
 
 var config = {
-    server: 'localhost',
+    server: 'NHA_HANG.mssql.somee.com',
     authentication: {
         type: 'default',
         options: {
-            userName: 'sa', // update me
-            password: '123' // update me
+            userName: 'sonba7b1_SQLLogin_3', // update me
+            password: 'vfqh1g5kt7' // update me
         }
     },
     options: {
