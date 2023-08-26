@@ -130,9 +130,7 @@ const changePassword = async (req, res) => {
 
 }
 
-const 
-
-updatePasswordForgot = async (req, res) => {
+const updatePasswordForgot = async (req, res) => {
 
     const { email, newPassword, role } = req.body
     try {
@@ -156,7 +154,6 @@ updatePasswordForgot = async (req, res) => {
     } catch (error) {
         res.status(StatusCodes.UNAUTHORIZED).json({ message: error })
     }
-
 }
 
 const forgotPassword = async (req, res) => {
@@ -191,4 +188,29 @@ const forgotPassword = async (req, res) => {
     }
 }
 
-module.exports = { register, login, changePassword, updatePasswordForgot, forgotPassword };
+const getInfoUser = async (req, res) => {
+
+    
+    try {
+        const { userId, role } = req.user
+
+        let pool = await sql.connect(config)
+
+        let result = await pool.request()
+            .input('userid', sql.NVarChar(100), userId)
+            .input("role", sql.Int, role)
+            .execute(process.env.SP_GET_INFO_USER)
+
+        res.status(StatusCodes.CREATED).json({
+            message: "successful!",
+            data: result.recordset
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(StatusCodes.UNAUTHORIZED).json({ message: error })
+    }
+
+}
+
+module.exports = { register, login, changePassword, updatePasswordForgot, forgotPassword, getInfoUser };
