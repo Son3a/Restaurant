@@ -190,7 +190,7 @@ const forgotPassword = async (req, res) => {
 
 const getInfoUser = async (req, res) => {
 
-    
+
     try {
         const { userId, role } = req.user
 
@@ -210,7 +210,37 @@ const getInfoUser = async (req, res) => {
         console.log(error)
         res.status(StatusCodes.UNAUTHORIZED).json({ message: error })
     }
-
 }
 
-module.exports = { register, login, changePassword, updatePasswordForgot, forgotPassword, getInfoUser };
+const updateInfoUser = async (req, res) => {
+    try {
+        const { userId, role } = req.user
+
+        const { fName, lName, numPhone, gender, address, avatar } = req.body
+
+        let pool = await sql.connect(config)
+
+        let result = await pool.request()
+            .input('userid', sql.NVarChar(100), userId)
+            .input("ho", sql.NVarChar(40), fName)
+            .input('ten', sql.NVarChar(20), lName)
+            .input("sdt", sql.NChar(10), numPhone)
+            .input('diachi', sql.NVarChar(100), address)
+            .input("gioitinh", sql.NChar(3), gender)
+            .input('avatar', sql.NChar(200), avatar)
+            .input("role", sql.Int, role)
+            .execute(process.env.SP_UPDATE_INFO_USER)
+
+        res.status(StatusCodes.CREATED).json({
+            message: "successful!",
+            data: result.recordset
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.status(StatusCodes.UNAUTHORIZED).json({ message: error })
+    }
+}
+
+
+module.exports = { register, login, changePassword, updatePasswordForgot, forgotPassword, getInfoUser, updateInfoUser };
