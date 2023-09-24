@@ -122,12 +122,12 @@ const getBookingAndFood = async (req, res) => {
 
 const findFood = async (req, res) => {
     try {
-        const { id } = req.params
+        const { data } = req.body
 
         let pool = await sql.connect(config)
 
         let result = await pool.request()
-            .input('data', sql.NVarChar(50), id)
+            .input('data', sql.NVarChar(50), data)
             .execute(process.env.SP_FIND_FOOD)
 
         res.status(StatusCodes.CREATED).json({ data: result.recordset })
