@@ -120,6 +120,22 @@ const getBookingAndFood = async (req, res) => {
     }
 }
 
+const findFood = async (req, res) => {
+    try {
+        const { id } = req.params
+
+        let pool = await sql.connect(config)
+
+        let result = await pool.request()
+            .input('data', sql.NVarChar(50), id)
+            .execute(process.env.SP_FIND_FOOD)
+
+        res.status(StatusCodes.CREATED).json({ data: result.recordset })
+
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 module.exports = {
     getPrices,
@@ -129,5 +145,6 @@ module.exports = {
     getFoodSaleOff,
     getPriceFoodsWithSaleOff,
     updatePriceFood,
-    getBookingAndFood
+    getBookingAndFood,
+    findFood
 }
