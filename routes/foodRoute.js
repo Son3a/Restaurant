@@ -21,6 +21,6 @@ router.route('/get-food-sale-off').get(getFoodSaleOff)
 router.route('/get-price-food-with-sale-off').get(getPriceFoodsWithSaleOff)
 router.route('/update-price-food').post(authMiddleWare, updatePriceFood)
 router.route('/get-booking-and-food/:id').get(getBookingAndFood)
-router.route('/find-food/:id').get(findFood)
+router.route('/find-food').post(findFood)
 
 module.exports = router;
