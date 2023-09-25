@@ -35,7 +35,7 @@ const getTopFoods = async (req, res) => {
         let pool = await sql.connect(config)
 
         let result = await pool.request()
-            .input('num_of_day', sql.NChar(11), id)
+            .input('num_of_day', sql.Int, id)
             .execute(process.env.SP_GET_TOP_FOOD)
 
         res.status(StatusCodes.CREATED).json({ data: result.recordset })
