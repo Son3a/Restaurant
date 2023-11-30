@@ -10,8 +10,6 @@ const nodemailer = require('nodemailer');
 const e = require('cors');
 
 const register = async (req, res) => {
-
-
     try {
         const { email, password, phoneNum, avatar, idRole, fName, lName, role } = req.body
 
@@ -52,6 +50,7 @@ const login = async (req, res) => {
 
     try {
         const { email, password, role } = req.body;
+        console.log('login');
 
         if (!email || !password) {
             res.status(StatusCodes.UNAUTHORIZED).json({ message: "Email or password is empty" })
@@ -86,6 +85,7 @@ const login = async (req, res) => {
         res.status(StatusCodes.OK).json({ data: result.recordset, token, message: "Successful" });
 
     } catch (error) {
+        console.log(error);
         res.status(StatusCodes.UNAUTHORIZED).json({ message: "Email không chính xác!" })
     }
 }
