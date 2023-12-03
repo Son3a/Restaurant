@@ -27,7 +27,7 @@ const register = async (req, res) => {
             .input("email", sql.NChar(100), email)
             .input("password", sql.NChar(100), passwordString)
             .input("sdt", sql.NChar(10), phoneNum)
-            .input("avatar", sql.NChar(200), avatar)
+            .input("avatar", sql.Text, avatar)
             .input("maquyen", sql.NChar(11), idRole)
             .input("role", sql.NChar(1), role)
             .execute(process.env.SP_CREATE_ACCOUNT)
@@ -74,7 +74,7 @@ const login = async (req, res) => {
         if (!isMatch) {
             throw new UnauthenticatedError("Mật khẩu không chính xác!")
         }
-
+        console.log(result.recordset);
         const token = jwt.sign({
             userId: dataResult[0]["USERID"].trim(),
             role
@@ -220,6 +220,8 @@ const updateInfoUser = async (req, res) => {
 
         let pool = await sql.connect(config)
 
+        console.log(avatar);
+
         let result = await pool.request()
             .input('userid', sql.NVarChar(100), userId)
             .input("ho", sql.NVarChar(40), fName)
@@ -227,10 +229,11 @@ const updateInfoUser = async (req, res) => {
             .input("sdt", sql.NChar(10), numPhone)
             .input('diachi', sql.NVarChar(100), address)
             .input("gioitinh", sql.NChar(3), gender)
-            .input('avatar', sql.NChar(200), avatar)
+            .input('avatar', sql.Text, avatar)
             .input("role", sql.Int, role)
             .execute(process.env.SP_UPDATE_INFO_USER)
 
+        console.log(result.recordset);
         res.status(StatusCodes.CREATED).json({
             message: "successful!",
             data: result.recordset

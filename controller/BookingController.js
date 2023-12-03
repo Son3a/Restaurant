@@ -22,6 +22,7 @@ const getTablesToBooking = async (req, res) => {
         // return result.output.idban
         res.status(StatusCodes.OK).json({ data: result.recordset })
     } catch (error) {
+        console.log(error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error);
     }
 }
