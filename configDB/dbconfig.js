@@ -4,8 +4,8 @@ var config = {
     authentication: {
         type: 'default',
         options: {
-            userName: 'sonba7b1_SQLLogin_3', // update me
-            password: 'vfqh1g5kt7' // update me
+            userName: 'sonba7b1_SQLLogin_1', // update me
+            password: 'biyxt54cc8' // update me
         }
     },
     options: {
