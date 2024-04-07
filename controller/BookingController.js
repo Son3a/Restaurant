@@ -70,6 +70,7 @@ const bookingTable = async (req, res) => {
         })
 
     } catch (error) {
+        console.log(error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error);
     }
 }
